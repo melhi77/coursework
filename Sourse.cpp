@@ -1,4 +1,4 @@
-﻿#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 #include <GLFW/glfw3.h>
 #include <windows.h>
 #include <stdio.h>
@@ -276,7 +276,8 @@ float Math(char* PostfixNotation, float xParam, float yParam)
     Node* top = NULL;
 
     char Ch = 0;
-    for (int i = 0; i < strlen(PostfixNotation); i++)
+    int len = strlen(PostfixNotation);
+    for (int i = 0; i < len; i++)
     {
         Ch = PostfixNotation[i];
         if (Ch == ' ')
