@@ -5,7 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
-#include <stdbool.h> 
+#include <stdbool.h>
 #include <math.h>
 float x = 0;
 float y = 0;
@@ -271,12 +271,12 @@ float Math(char* PostfixNotation, float xParam, float yParam)
 {
     double a, b, c;
 
-    
+    int len = strlen(PostfixNotation);
+
 
     Node* top = NULL;
 
     char Ch = 0;
-    int len = strlen(PostfixNotation);
     for (int i = 0; i < len; i++)
     {
         Ch = PostfixNotation[i];
@@ -411,24 +411,32 @@ int main()
     Documentation();
 
 
-    char infixNotation[100] = { 0 }, PostfixNotation[100] = { 0 };
+    char infixNotation[1000] = { 0 }, PostfixNotation[1000] = { 0 };
     scanf("%s", infixNotation);
 
     SortingStation(infixNotation, PostfixNotation);//Перевел инфиксную нотацию в постфиксную
 
+    int len = strlen(PostfixNotation);
 
     struct Point3D Points[15000];
-
+    Point3D newPoint1;
+    Point3D newPoint2;
     int pointCount = 0;
-    for (float xParam = -8; xParam < 8; xParam += 0.15)
+    for (float xParam = -8; xParam < 8; xParam += 0.3)
     {
+
+        newPoint1.x = xParam;
+        newPoint2.x = xParam + 0.15;
+
         for (float yParam = -8; yParam < 8; yParam += 0.15)
         {
-            Point3D newPoint;
-            newPoint.x = xParam;
-            newPoint.y = yParam;
-            newPoint.z = Math(PostfixNotation, xParam, yParam);
-            Points[pointCount++] = newPoint;
+            newPoint1.y = yParam;
+            newPoint1.z = Math(PostfixNotation, xParam, yParam);
+            Points[pointCount++] = newPoint1;
+
+            newPoint2.y = yParam;
+            newPoint2.z = Math(PostfixNotation, xParam + 0.15, yParam);
+            Points[pointCount++] = newPoint2;
         }
     }
 
